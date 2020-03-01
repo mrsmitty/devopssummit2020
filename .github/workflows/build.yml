@@ -3,6 +3,7 @@ name: Frontend CI
 on: [push]
 env:
   NODE_VERSION: '12.x'
+  ANGULAR_DIRECTORY: './src/devops-summit'
 
 jobs:
   test-and-build:
@@ -15,6 +16,7 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: npm install and npm run build
+      working-directory: ${{ env.ANGULAR_DIRECTORY }}
       run: |
         npm i
         npm run release
