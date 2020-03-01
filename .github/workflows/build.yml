@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - master
-  push:
 
 env:
   NODE_VERSION: '12.x'
