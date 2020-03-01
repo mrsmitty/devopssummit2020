@@ -6,7 +6,7 @@ on:
       - master
   push:
     branches:
-      - features*
+      - feature*
 env:
   NODE_VERSION: '12.x'
   ANGULAR_DIRECTORY: './src/devops-summit'
