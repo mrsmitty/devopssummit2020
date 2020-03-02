@@ -30,6 +30,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('devops-summit  I\'ve changed the app!');
+    expect(compiled.querySelector('.content span').textContent).toContain('devops-summit I\'ve changed the app!');
   });
 });
