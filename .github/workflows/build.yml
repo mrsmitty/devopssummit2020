@@ -1,0 +1,33 @@
+name: Frontend CI
+
+on: 
+  pull_request:
+    branches:
+      - master
+
+env:
+  NODE_VERSION: '12.x'
+  ANGULAR_DIRECTORY: './src/devops-summit'
+
+jobs:
+  test-and-build:
+    name: Scan, test, build, package
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ubuntu-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ubuntu-node-
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install and npm run build
+      working-directory: ${{ env.ANGULAR_DIRECTORY }}
+      run: |
+        npm i
+        npm run test
