@@ -7,3 +7,11 @@ variables: # several syntaxes, see specific section
 trigger: trigger
 pr: pr
 jobs:
+steps:
+- script: echo This runs in the default shell on any machine
+- bash: |
+    echo This multiline script always runs in Bash.
+    echo Even on Windows machines!
+- pwsh: |
+    Write-Host "This multiline script always runs in PowerShell Core."
+    Write-Host "Even on non-Windows machines!"
