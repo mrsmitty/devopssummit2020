@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "acrSku": {
+            "type": "string",
+            "defaultValue": "Basic"
+        },
+        "aspSku": {
+            "type": "string",
+            "defaultValue": "S1"
+        }
+    },
+    "variables": {
+        "acrPullRoleId": "7f951dda-4ed3-4680-a7ca-43fe172d538d",
+        "prefix": "DEVOPS-SYD",
+        "suffix": "SUMMIT2020",
+        "acrName": "[toLower(replace(format('{0}{1}{2}',variables('prefix'),'acr',variables('suffix')), '-', ''))]",
+        "appServicePlanName": "[format('{0}-{1}-{2}',variables('prefix'),'ASP',variables('suffix'))]",
+        "webAppName": "[format('{0}-{1}-{2}',variables('prefix'),'WEB',variables('suffix'))]",
+        "appInsightsName": "[format('{0}-{1}-{2}',variables('prefix'),'AIN',variables('suffix'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Insights/components",
+            "name": "[variables('appInsightsName')]",
+            "apiVersion": "2015-05-01",
+            "location": "[resourceGroup().location]",
+            "tags": {
+            },
+            "kind": "web",
+            "properties": {
+                "Application_Type": "web"
+            }
+        },
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2019-08-01",
+            "name": "[variables('appServicePlanName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "[parameters('aspSku')]"
+            },
+            "kind": "linux",
+            "properties": {
+                "reserved": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "name": "[variables('webAppName')]",
+            "apiVersion": "2019-08-01",
+            "location": "[resourceGroup().location]",
+            "kind": "app,linux,container",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+            ],
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
+                "siteConfig": {
+                    "linuxFxVersion": "DOCKER|nginx"
+                }
+            },
+            "identity": {
+                "type": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.ContainerRegistry/registries",
+            "name": "[variables('acrName')]",
+            "apiVersion": "2019-05-01",
+            "location": "[resourceGroup().location]",
+            "comments": "Container registry for storing docker images",
+            "tags": {
+                "displayName": "Container Registry",
+                "container.registry": "[variables('acrName')]"
+            },
+            "sku": {
+                "name": "[parameters('acrSku')]",
+                "tier": "[parameters('acrSku')]"
+            },
+            "properties": {
+                "adminUserEnabled": "true"
+            }
+        },
+        {
+            "type": "Microsoft.Authorization/roleAssignments",
+            "apiVersion": "2018-09-01-preview",
+            "name": "[guid(resourceGroup().id, variables('webAppName'))]",
+            "properties": {
+                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', variables('acrPullRoleId'))]",
+                "principalId": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'Full').identity.principalId]"
+            },
+            "dependsOn": [
+                "[variables('webAppName')]",
+                "[variables('acrName')]"
+            ]
+        }
+    ],
+    "outputs": {
+    }
+}
