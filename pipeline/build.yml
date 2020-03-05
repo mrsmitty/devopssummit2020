@@ -25,5 +25,4 @@ stages:
             repository: devopssummit2020
             dockerfile: $(dockerfilePath)
             containerRegistry: devopssydacrsummit2020.azurecr.io
-            tags: |
-              1
+            tags: '$(Build.BuildNumber)'
