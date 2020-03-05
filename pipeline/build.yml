@@ -1,7 +1,7 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
 variables:
-  dockerfilePath: $(Build.SourcesDirectory)src/devops-summit/
+  dockerfilePath: $(Build.SourcesDirectory)/src/devops-summit/
   repositoryServiceConnection: sp-acr-summit2020
   containerRepository: devopssummit2020
 
