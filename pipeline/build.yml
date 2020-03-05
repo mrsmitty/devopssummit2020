@@ -4,7 +4,7 @@ variables:
   dockerfilePath: $(Build.SourcesDirectory)/src/devops-summit/Dockerfile
   containerConnection: sp-acr-summit2020
 
-pr:
+trigger:
 - master
 
 stages:
