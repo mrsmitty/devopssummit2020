@@ -2,6 +2,8 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 
 variables:
   dockerfilePath: /src/devops-summit
+  repositoryServiceConnection: sp-acr-summit2020
+  containerRepository: devopssummit2020
 
 pr:
 - master
@@ -13,16 +15,16 @@ stages:
     jobs:
     - job: ContainerBuild
       steps:
-        - task: Docker@2
-          displayName: Login to ACR
-          inputs:
-            command: login
-            containerRegistry: devopssydacrsummit2020.azurecr.io
+        # - task: Docker@2
+        #   displayName: Login to ACR
+        #   inputs:
+        #     command: login
+        #     containerRegistry: devopssydacrsummit2020.azurecr.io
         - task: Docker@2
           displayName: Build and push an image to container registry
           inputs:
             command: buildAndPush
-            repository: devopssummit2020
+            repository: $(containerRepository)
             dockerfile: $(dockerfilePath)
-            containerRegistry: devopssydacrsummit2020.azurecr.io
+            containerRegistry: $(repositoryServiceConnection)
             tags: '$(Build.BuildNumber)'
