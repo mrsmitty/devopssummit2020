@@ -2,6 +2,7 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 
 variables:
   dockerfilePath: $(Build.SourcesDirectory)/src/devops-summit/Dockerfile
+  subscription: sp-ado-summit2020
 
 pr:
 - master
