@@ -17,13 +17,13 @@ stages:
           displayName: Login to ACR
           inputs:
             command: login
-            containerRegistry: $(dockerRegistryServiceConnection)
+            containerRegistry: devopssydacrsummit2020.azurecr.io
         - task: Docker@2
           displayName: Build and push an image to container registry
           inputs:
             command: buildAndPush
-            repository: $(imageRepository)
+            repository: devopssummit2020
             dockerfile: $(dockerfilePath)
-            containerRegistry: $(dockerRegistryServiceConnection)
+            containerRegistry: devopssydacrsummit2020.azurecr.io
             tags: |
-              $(tag)
+              1
