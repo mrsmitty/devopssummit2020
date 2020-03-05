@@ -1,17 +1,29 @@
-name: string  # build numbering format
-resources:
-  pipelines: [ pipelineResource ]
-  containers: [ containerResource ]
-  repositories: [ repositoryResource ]
-variables: # several syntaxes, see specific section
-trigger: trigger
-pr: pr
-jobs:
-steps:
-- script: echo This runs in the default shell on any machine
-- bash: |
-    echo This multiline script always runs in Bash.
-    echo Even on Windows machines!
-- pwsh: |
-    Write-Host "This multiline script always runs in PowerShell Core."
-    Write-Host "Even on non-Windows machines!"
+name: $(Date:yyyyMMdd)$(Rev:.r)
+
+variables:
+  dockerfilePath: /src/devops-summit
+
+pr:
+- master
+
+stages:
+  - stage: Development
+    variables:
+      - group: DevOpsGroup
+    jobs:
+    - job: Container Build
+      steps:
+        - task: Docker@2
+          displayName: Login to ACR
+          inputs:
+            command: login
+            containerRegistry: $(dockerRegistryServiceConnection)
+        - task: Docker@2
+          displayName: Build and push an image to container registry
+          inputs:
+            command: buildAndPush
+            repository: $(imageRepository)
+            dockerfile: $(dockerfilePath)
+            containerRegistry: $(dockerRegistryServiceConnection)
+            tags: |
+              $(tag)
