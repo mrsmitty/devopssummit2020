@@ -7,7 +7,7 @@ on:
 
 env:
   NODE_VERSION: '12.x'
-  ANGULAR_DIRECTORY: './src/devops-summit'
+  ANGULAR_DIRECTORY: './src/devops-summit/ClientApp'
 
 jobs:
   test-and-build:
@@ -30,4 +30,4 @@ jobs:
       working-directory: ${{ env.ANGULAR_DIRECTORY }}
       run: |
         npm i
-        npm run test
+        npm run build

@@ -1,8 +1,0 @@
-version: '2.1'
-
-services:
-  devopssummit2020:
-    image: devopssummit2020
-    build: .
-    ports:
-      - 80:80
