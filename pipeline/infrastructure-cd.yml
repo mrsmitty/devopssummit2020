@@ -22,11 +22,13 @@ stages:
       pool:
         vmImage: 'windows-latest'
       steps:
-        - task: AzureCLI@2
-          displayName: IaC CD
+        - task: AzureResourceManagerTemplateDeployment@3
           inputs:
-            azureSubscription: sp-ado-summit2020
-            scriptType: ps
-            scriptLocation: scriptPath
-            scriptPath: $(scriptPath)
-            arguments: '"$(resourceGroup)" "$(templatePath)"'
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: 'sp-ado-summit2020'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(resourceGroup)'
+            location: 'australiaeast'
+            templateLocation: 'Linked artifact'
+            csmFile: '$(templatePath)'
+            deploymentMode: 'Incremental'
