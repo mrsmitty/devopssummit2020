@@ -87,20 +87,20 @@
             "properties": {
                 "adminUserEnabled": "true"
             }
-        },
-        {
-            "type": "Microsoft.Authorization/roleAssignments",
-            "apiVersion": "2018-09-01-preview",
-            "name": "[guid(resourceGroup().id, variables('webAppName'))]",
-            "properties": {
-                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', variables('acrPullRoleId'))]",
-                "principalId": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'Full').identity.principalId]"
-            },
-            "dependsOn": [
-                "[variables('webAppName')]",
-                "[variables('acrName')]"
-            ]
         }
+        // {
+        //     "type": "Microsoft.Authorization/roleAssignments",
+        //     "apiVersion": "2018-09-01-preview",
+        //     "name": "[guid(resourceGroup().id, variables('webAppName'))]",
+        //     "properties": {
+        //         "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', variables('acrPullRoleId'))]",
+        //         "principalId": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'Full').identity.principalId]"
+        //     },
+        //     "dependsOn": [
+        //         "[variables('webAppName')]",
+        //         "[variables('acrName')]"
+        //     ]
+        // }
     ],
     "outputs": {
     }
