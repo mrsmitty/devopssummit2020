@@ -24,4 +24,4 @@ stages:
             scriptType: ps
             scriptLocation: scriptPath
             scriptPath: $(scriptPath)
-            arguments: $(resourceGroup) $(templatePath)
+            arguments: '"$(resourceGroup)" "$(templatePath)"'
