@@ -6,7 +6,12 @@ variables:
   resourceGroup: "DEVOPS-SYD-ARG-SUMMIT2020"
 
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - infrastructure/*
 
 stages:
   - stage: Development
