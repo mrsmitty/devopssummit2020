@@ -62,6 +62,18 @@
                         {
                             "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
                             "value": "[reference(resourceId('Microsoft.Insights/components', variables('appInsightsName')), '2015-05-01').instrumentationKey]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "[concat('https://', variables('acrName'),'.azurecr.io')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                            "value": "[variables('acrName')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                            "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', variables('acrName')), '2019-05-01').passwords[0].value]"
                         }
                     ]
                 }
@@ -88,6 +100,7 @@
                 "adminUserEnabled": "true"
             }
         }
+        // ,
         // {
         //     "type": "Microsoft.Authorization/roleAssignments",
         //     "apiVersion": "2018-09-01-preview",
