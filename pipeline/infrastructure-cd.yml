@@ -20,7 +20,7 @@ stages:
         - task: AzureCLI@2
           displayName: IaC CD
           inputs:
-            azureSubscription: $(subscription)
+            azureSubscription: sp-ado-summit2020
             scriptType: ps
             scriptLocation: scriptPath
             scriptPath: $(scriptPath)
