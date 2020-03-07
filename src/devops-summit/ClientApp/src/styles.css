@@ -7,12 +7,16 @@ a {
 body {
   background-color: #ffffff;
 }
-code {
-  color: #e01a76;
-}
-img {
-  max-height:100%;
+img.logos {
+  height:150px;
   max-width:100%;
+  vertical-align: middle;
+}
+.c-logo {
+  display: block;
+  height: 30px;
+  width: 98.571px;
+  position: relative;
 }
 .btn-primary {
   color: #fff;
@@ -38,7 +42,7 @@ img {
   line-height: 150px;
 }
 span.emoji {
-  font-size: 80px;
+  font-size: 60px;
   vertical-align: middle;
   line-height: 2;
 }
