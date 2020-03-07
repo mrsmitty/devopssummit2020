@@ -10,7 +10,7 @@
 ## Paths and Iterations
 
 ### Paths
-
+Within Settings:
 - Navigate to Boards\Project configuration
 - Navigate to Areas
 - Create a new Area for the content team
@@ -32,8 +32,13 @@
 
 ![img](./media/Iterations.png)
 
+## Import
+- Navigate to Boards\Queries
+- Select Import from CSV
+- Select the file backlog\Backlog Import.csv within the repo
+
 ## Extensions
 
 - From the marketplace
-  - [Delivery Plans](https://marketplace.visualstudio.com/items?itemName=ms.vss-plans&targetId=02800c77-a704-4197-99c2-b6f53a0d2ed0)
-  - [Retrospectives](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.team-retrospectives&targetId=02800c77-a704-4197-99c2-b6f53a0d2ed0)
+  - [Delivery Plans](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.workitem-feature-timeline-extension)
+  - [Retrospectives](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.team-retrospectives)

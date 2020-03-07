@@ -58,7 +58,13 @@
             "properties": {
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
                 "siteConfig": {
-                    "linuxFxVersion": "DOCKER|nginx"
+                    "linuxFxVersion": "DOCKER|nginx",
+                    "appSettings": [
+                        {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value": "[reference(resourceId('Microsoft.Insights/components', variables('appInsightsName')), '2015-05-01').instrumentationKey]"
+                        }
+                    ]
                 }
             },
             "identity": {

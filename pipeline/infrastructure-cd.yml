@@ -1,0 +1,27 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)
+
+variables:
+  scriptPath: $(Build.SourcesDirectory)/infrastructure/deploy.ps1
+  templatePath: $(Build.SourcesDirectory)/infrastructure/template.json
+  resourceGroup: "DEVOPS-SYD-ARG-SUMMIT2020"
+
+trigger:
+- master
+
+stages:
+  - stage: Development
+    variables:
+      - group: DevEnvironment
+    jobs:
+    - job: ContainerBuild
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - task: AzureCLI@2
+          displayName: IaC CD
+          inputs:
+            azureSubscription: $(subscription)
+            scriptType: ps
+            scriptLocation: scriptPath
+            scriptPath: $(scriptPath)
+            arguments: $(resourceGroup) $(templatePath)

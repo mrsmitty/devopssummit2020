@@ -1,0 +1,22 @@
+<h1 id="tableLabel">GitHub Commits</h1>
+
+<p>Retrieve commits from the GitHub API</p>
+
+<p *ngIf="!commits"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="commits">
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Date</th>
+      <th>Url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let commit of commits">
+      <td>{{ commit.by }}</td>
+      <td>{{ commit.date }}</td>
+      <td><a href="{{commit.url}}">{{ commit.url }}</a></td>
+    </tr>
+  </tbody>
+</table>
