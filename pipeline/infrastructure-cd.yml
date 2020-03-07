@@ -1,8 +1,8 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
 variables:
-  scriptPath: $(Build.SourcesDirectory)/infrastructure/deploy.ps1
-  templatePath: $(Build.SourcesDirectory)/infrastructure/template.json
+  scriptPath: $(Build.SourcesDirectory)\infrastructure\deploy.ps1
+  templatePath: $(Build.SourcesDirectory)\infrastructure\template.json
   resourceGroup: "DEVOPS-SYD-ARG-SUMMIT2020"
 
 trigger:
@@ -13,7 +13,7 @@ stages:
     variables:
       - group: DevEnvironment
     jobs:
-    - job: ContainerBuild
+    - job: InfrastructureDeploy
       pool:
         vmImage: 'windows-latest'
       steps:
