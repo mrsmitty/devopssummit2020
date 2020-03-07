@@ -5,7 +5,12 @@ variables:
   containerConnection: sp-acr-summit2020
 
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/*
 
 stages:
   - stage: Development
