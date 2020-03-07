@@ -8,7 +8,7 @@
 - commit the changes with the message "AB#7755"
 - Create a pull request
 - Show builds executing (GitHub Actions and Azure Pipelines)
-- Add a commit to the PR with "Fixes AB#7755", will mark the task as done
+- Add a commit to the PR with "Fixes AB#7755", will mark the task as done...it didn't work
 - Merge the changes
 
 ## References
