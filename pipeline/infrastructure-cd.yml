@@ -1,27 +1,34 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
 variables:
-  scriptPath: $(Build.SourcesDirectory)/infrastructure/deploy.ps1
-  templatePath: $(Build.SourcesDirectory)/infrastructure/template.json
+  scriptPath: $(Build.SourcesDirectory)\infrastructure\deploy.ps1
+  templatePath: $(Build.SourcesDirectory)\infrastructure\template.json
   resourceGroup: "DEVOPS-SYD-ARG-SUMMIT2020"
 
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - infrastructure/*
 
 stages:
   - stage: Development
     variables:
       - group: DevEnvironment
     jobs:
-    - job: ContainerBuild
+    - job: InfrastructureDeploy
       pool:
         vmImage: 'windows-latest'
       steps:
-        - task: AzureCLI@2
-          displayName: IaC CD
+        - task: AzureResourceManagerTemplateDeployment@3
           inputs:
-            azureSubscription: sp-ado-summit2020
-            scriptType: ps
-            scriptLocation: scriptPath
-            scriptPath: $(scriptPath)
-            arguments: '"$(resourceGroup)" "$(templatePath)"'
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: 'sp-ado-summit2020'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(resourceGroup)'
+            location: 'australiaeast'
+            templateLocation: 'Linked artifact'
+            csmFile: '$(templatePath)'
+            deploymentMode: 'Incremental'

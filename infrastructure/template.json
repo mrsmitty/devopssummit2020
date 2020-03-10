@@ -58,11 +58,22 @@
             "properties": {
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
                 "siteConfig": {
-                    "linuxFxVersion": "DOCKER|nginx",
                     "appSettings": [
                         {
                             "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
                             "value": "[reference(resourceId('Microsoft.Insights/components', variables('appInsightsName')), '2015-05-01').instrumentationKey]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "[concat('https://', variables('acrName'),'.azurecr.io')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                            "value": "[variables('acrName')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                            "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', variables('acrName')), '2019-05-01').passwords[0].value]"
                         }
                     ]
                 }
@@ -88,20 +99,21 @@
             "properties": {
                 "adminUserEnabled": "true"
             }
-        },
-        {
-            "type": "Microsoft.Authorization/roleAssignments",
-            "apiVersion": "2018-09-01-preview",
-            "name": "[guid(resourceGroup().id, variables('webAppName'))]",
-            "properties": {
-                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', variables('acrPullRoleId'))]",
-                "principalId": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'Full').identity.principalId]"
-            },
-            "dependsOn": [
-                "[variables('webAppName')]",
-                "[variables('acrName')]"
-            ]
         }
+        // ,
+        // {
+        //     "type": "Microsoft.Authorization/roleAssignments",
+        //     "apiVersion": "2018-09-01-preview",
+        //     "name": "[guid(resourceGroup().id, variables('webAppName'))]",
+        //     "properties": {
+        //         "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', variables('acrPullRoleId'))]",
+        //         "principalId": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'Full').identity.principalId]"
+        //     },
+        //     "dependsOn": [
+        //         "[variables('webAppName')]",
+        //         "[variables('acrName')]"
+        //     ]
+        // }
     ],
     "outputs": {
     }
