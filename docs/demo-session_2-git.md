@@ -7,6 +7,7 @@
 - modify emoji to ji:heavy-black-heart &#x2764;
 - commit the changes with the message "AB#7755"
 - Create a pull request
+- commit the changes with the message "Fixed AB#7755"
 - Show link in backlog
 - Show builds executing (GitHub Actions and Azure Pipelines)
 - Merge the PR
