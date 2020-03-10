@@ -1,30 +1,23 @@
 # Azure Boards
 
-Describe scenario
-- Team that is developing a site to manage scrum information, registration of certified practitioners, events and jobs.
-- Well developed backlog in Azure Boards
-- Two teams responsible for Accounts and Content
+## Product Owner
 
+- DevOps Inc. Scrum template, define work as
+  - Epics, Features, PBI, Tasks
+- Ideas start as broad ideas, and refine until they're ready for the team to estimate and start work(epics) to specific implementation details (tasks)
+- View provides an overview for product owners to plan and prioritise work
+
+## Market Place
+- Azure DevOps provides a market place for content creators to extend the functionality
+- Filter boards, retrospectives and planning pocker
+- Feature time, provide overview to project managers where work is assigned and timelines
+
+## Developers
+- Developers will mostly work within sprints
+- Gives an over of work in progress, easy UI for transitioning the state of items and assigning work
+- Daily Standup
+- Provides capacity planning and burn down
+- Control the capacity of our team, assign days off
 - Open the Azure DevOps project DevOps Summit 2020
-- Navigate to boards
-- View workitems
-  - Raw view of all items in the project
-- View Backlog
-  - Show the concept of teams within the backlog
-  - Explore the accounts team and content team (stay on content team, will be team for rest of demo)
-  - Discuss sprints and demo dragging items into a sprint (Accounts Team)
-    - show item count, velocity update in the sprint overview
-- Drill into Sprint 1
-  - Show Taskboard view
-    - Discuss capacity of the team
-    - Show how capacity changes with update of time
-  - Show capacity planning
-    - Capacity per day, Change Ramesh to 0 hours
-    - Show days off for team
-    - Show days off for individual members
-    - head back to boards to show how the team is now under capacity
-- Open Excel
-  - Open Backlog Hierachy
-  - Update Tag to Summit2020
-  - Publish
-  - Show changes back in ADO
+
+__Start development, move item to in progress and look at development process__
