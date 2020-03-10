@@ -1,12 +1,10 @@
 ## Demo 4 - Azure Monitor
 
-- Demonstrate the frontend and generate some requests
-- Head to Azure and explore the features of Azure Monitor
-  - Alerts
-  - Application Map
-  - Failures
-- Drill into failures
-- Navigate to the exception and drill in further
-- Show the exception details
-- Create a new work item
-- Head back to Azure DevOps and view the work item
+- Head to App Insights
+  - Overview of key metrics
+  - We can add these to a dashboard but we only want to be here if something has gone wrong
+  - Check alerts and notice we have an alert raise for exception
+  - Nav to failures and drill into exception
+  - Explore the information we have in the exception
+  - Create a new work item
+  - Head back to Azure DevOps and view the work item
