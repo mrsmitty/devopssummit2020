@@ -14,7 +14,7 @@
     "variables": {
         "acrPullRoleId": "7f951dda-4ed3-4680-a7ca-43fe172d538d",
         "prefix": "DEVOPS-SYD",
-        "suffix": "SUMMIT2020",
+        "suffix": "DEMO01",
         "acrName": "[toLower(replace(format('{0}{1}{2}',variables('prefix'),'acr',variables('suffix')), '-', ''))]",
         "appServicePlanName": "[format('{0}-{1}-{2}',variables('prefix'),'ASP',variables('suffix'))]",
         "webAppName": "[format('{0}-{1}-{2}',variables('prefix'),'WEB',variables('suffix'))]",

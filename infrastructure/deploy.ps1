@@ -1,5 +1,5 @@
 param(
-    [string] $rgName = "DEVOPS-SYD-ARG-SUMMIT2020",
+    [string] $rgName = "DEVOPS-SYD-ARG-DEMO01",
     [string] $templatePath = ".\template.json"
 )
 $location = "australiaeast"
